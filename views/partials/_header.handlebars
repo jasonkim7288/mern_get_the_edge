@@ -1,0 +1,22 @@
+<nav class="navbar navbar-light bg-light">
+  <div class="container">
+    {{#if user}}
+      <a href="/crawls" class="navbar-brand font-weight-bolder">Get The Edge</a>
+      {{#with user}}
+      {{#if photo}}
+        <img src="{{photo}}" alt="profile photo" class="ml-auto mr-3" width="40" style="border-radius: 50%;" />
+      {{/if}}
+      {{/with}}
+      <a href="/auth/logout">
+        Logout
+        <i class="fas fa-sign-out-alt"></i>
+      </a>
+    {{else}}
+      <a href="/" class="navbar-brand font-weight-bolder">Get The Edge</a>
+      <a href="/auth/google" class="text-danger">
+        <i class="fab fa-google"></i>
+        Login with Google
+      </a>
+    {{/if}}
+  </div>
+</nav>

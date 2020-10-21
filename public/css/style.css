@@ -1,0 +1,27 @@
+.sync-wrapper {
+  font-size: 200px;
+}
+
+.sync-icon {
+  animation: icon-rotate 5s linear infinite;
+}
+
+@keyframes icon-rotate {
+  0% {
+    transform: rotate(0);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+a:link{
+  text-decoration: none;
+}
+
+.show-link {
+  color: black;
+}

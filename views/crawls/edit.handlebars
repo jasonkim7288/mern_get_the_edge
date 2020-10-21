@@ -1,0 +1,54 @@
+<h1 class="mb-4">Edit Crawl information</h1>
+{{#with crawl}}
+  <form action="/crawls/{{_id}}?_method=PUT" method="post">
+    <input type="hidden" name="_method" value="PUT">
+    <div class="form-group field">
+      <label for="jobTitle">Job Title</label>
+      <input type="text" name="jobTitle" class="form-control" value="{{jobTitle}}"/>
+    </div>
+
+    <div class="form-group field">
+      <label for="region">Region</label>
+      <select name="region" class="form-control">
+        {{#select region}}
+          <optgroup label="QLD">
+          <option value="All Brisbane QLD">All Brisbane QLD</option>
+          <option value="Brisbane CBD & Inner Suburbs Brisbane QLD">Brisbane CBD & Inner Suburbs Brisbane QLD</option>
+          </optgroup>
+          <optgroup label="NSW">
+          <option value="All Sydney NSW">All Sydney NSW</option>
+          <option value="Sydney CBD, Inner West & Eastern Suburbs Sydney NSW">Sydney CBD, Inner West & Eastern Suburbs Sydney NSW</option>
+          <optgroup label="VIC">
+          <option value="All Melbourne VIC">All Melbourne VIC</option>
+          <option value="Melbourne CBD & Inner Suburbs Melbourne VIC">Melbourne CBD & Inner Suburbs Melbourne VIC</option>
+          </optgroup>
+          <optgroup label="TAS">
+          <option value="Tasmania TAS">Tasmania TAS</option>
+          <option value="All Hobart TAS">All Hobart TAS</option>
+          <option value="Launceston TAS 7250">Launceston TAS 7250</option>
+          </optgroup>
+          <optgroup label="SA">
+          <option value="All Adelaide SA">All Adelaide SA</option>
+          </optgroup>
+          <optgroup label="WA">
+          <option value="All Perth WA">All Perth WA</option>
+          <option value="Perth CBD, Inner & Western Suburbs Perth WA">Perth CBD, Inner & Western Suburbs Perth WA</option>
+          </optgroup>
+          <optgroup label="NT">
+          <option value="All Darwin NT">All Darwin NT</option>
+          <option value="Western Suburbs & Ipswich Brisbane QLD">Western Suburbs & Ipswich Brisbane QLD</option>
+          </optgroup>
+        {{/select}}
+      </select>
+    </div>
+
+    <div class="form-group field">
+      <label for="skills">Skills <span class="text-danger">( Please list all the skills with ',' )</span></label>
+      <input type="text" name="skills" class="form-control" value="{{skills}}"/>
+    </div>
+
+    <div class="form-group field mt-5">
+      <button type="submit" class="btn btn-primary btn-block">Save</button>
+    </div>
+  </form>
+{{/with}}

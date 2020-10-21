@@ -1,0 +1,38 @@
+<h1>Crawl statistics</h1>
+{{#with crawl}}
+  <div class="card h-100 shadow">
+    <div class="card-body">
+      <div class="card-title"><h3>{{jobTitle}}</h3></div>
+      <div class="card-text mb-3">Region : {{region}}</div>
+      <div class="card-text mb-3">
+        {{#each skills}}
+          {{#if ../isDefault}}
+            <span class="badge badge-pill badge-primary">{{keyword}}</span>
+          {{else}}
+            <span class="badge badge-pill badge-success">{{keyword}}</span>
+          {{/if}}
+        {{/each}}
+      </div>
+      <div class="card-text">
+        <button class="btn btn-primary" id="start-crawl" data-crawlid={{_id}}>Start crawl for today!</button>
+      </div>
+    </div>
+  </div>
+  <div class="sync-wrapper text-center d-none">
+    <i class="fas fa-sync-alt sync-icon"></i>
+  </div>
+{{/with}}
+
+<h2 class="mt-5 text-center">
+  Recent Result
+  {{#if recentDate}}
+  ({{recentDate}})
+  {{/if}}
+</h2>
+
+{{#if totalJobs}}
+  <h4 class="mt-3 text-center">Total jobs : {{totalJobs}}</h4>
+{{/if}}
+<canvas id="chart-recent" data-crawl="{{crawlStr}}"></canvas>
+<h2 class="mt-5 text-center">History</h2>
+<canvas id="chart-history" data-crawl="{{crawlStr}}"></canvas>

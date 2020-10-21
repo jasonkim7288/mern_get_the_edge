@@ -1,0 +1,51 @@
+{{#if user}}
+  {{#with user}}
+    <h1>
+      Welcome {{firstName}} {{lastName}}
+    </h1>
+  {{/with}}
+  <h4 class="mb-4 mt-4">
+    All crawls
+    <a href="/crawls/new" class="btn btn-primary ml-5">Create new</a>
+
+  </h4>
+  <div class="row rol-cols-1 row-cols-sm-1 row-cols-md-2 row-cols-lg-3">
+    {{#each allCrawls}}
+      <div class="col mb-4">
+        <a href="/crawls/{{_id}}" class="show-link">
+          <div class="card h-100 shadow" style="width: 300px" data-aos="fade-left">
+            <div class="card-body">
+              <div class="card-title"><h3>{{jobTitle}}</h3></div>
+              <div class="card-text mb-3"><Strong>Region</Strong> : {{region}}</div>
+              <div class="card-text mb-3">
+                {{#each skills}}
+                  {{#if ../isDefault}}
+                    <span class="badge badge-pill badge-primary">{{keyword}}</span>
+                  {{else}}
+                    <span class="badge badge-pill badge-success">{{keyword}}</span>
+                  {{/if}}
+                {{/each}}
+              </div>
+              {{#unless isDefault}}
+                <div class="card-text">
+                  <form class="form-inline" action="/crawls/{{_id}}?_method=DELETE" method="post">
+                    <a href="/crawls/{{_id}}/edit" type="button" class="btn btn-warning mr-3 ml-auto btn-sm">
+                      Edit
+                    </a>
+                    <input type="hidden" name="_method" value="DELETE">
+                    <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+                  </form>
+                </div>
+              {{/unless}}
+            </div>
+          </div>
+        </a>
+      </div>
+    {{/each}}
+  </div>
+{{else}}
+  <h1>
+    Please <a href="/auth/google">login</a> first
+  </h1>
+{{/if}}
+
