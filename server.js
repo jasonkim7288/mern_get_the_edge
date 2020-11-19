@@ -5,10 +5,7 @@ const MongoStore = require('connect-mongo')(expressSession);
 const cookieParser = require('cookie-parser');
 const passport = require('passport');
 const path = require("path");
-const methodOverride = require("method-override");
-
-const exphbs = require('express-handlebars');
-const { select } = require('./helpers/hbs');
+const cors = require('cors');
 
 if (process.env.NODE_ENV !== 'production') {
   require('dotenv').config();
@@ -34,20 +31,21 @@ mongoose.connect(
 
 const app = express();
 
+var whitelist =['http://localhost:3000'];
+app.use(cors({
+  credentials: true,
+  origin: function (origin, callback) {
+    console.log('origin:', origin);
+    if (whitelist.indexOf(origin) !== -1) {
+      callback(null, true);
+    } else {
+      callback(new Error('Not allowed by CORS'));
+    }
+  }
+}))
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
-
-app.use(methodOverride("_method"));
-app.engine(
-  "handlebars",
-  exphbs({
-    helpers: {
-      select
-    },
-    defaultLayout: "main"
-  })
-);
-app.set("view engine", "handlebars");
 
 app.use(cookieParser());
 app.use(expressSession({
@@ -69,12 +67,12 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use("/", require('./routes/index_routes'));
+// app.use("/", require('./routes/index_routes'));
 app.use('/auth', require('./routes/auth_routes'));
 app.use('/crawls', require('./routes/crawls_routes'));
 app.use('/api/crawl', require('./routes/api_crawl_routes'));
 
 app.use(express.static(path.join(__dirname, 'public')));
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 8080;
 app.listen(port, () => console.log("server is listening on port " + port));

@@ -2,7 +2,9 @@ const express = require('express');
 const router = express.Router();
 const passport = require('passport');
 
-router.get('/google', passport.authenticate('google', { scope: ['profile', 'email'], session: true}));
+router.get('/google',
+  (req, res, next) => {console.log('here'); next();},
+  passport.authenticate('google', { scope: ['profile', 'email'], session: true}));
 
 router.get('/google/callback',
   passport.authenticate('google', { failureRedirect: '/', session: true}),
